@@ -3,7 +3,7 @@ import os
 class Settings:
     app_name: str = "New API"
     admin_email: str = "artemlinkin@mail.ru"
-    DATABASE_URL: str = "sqlite:///./test02.db"
+    #DATABASE_URL: str = "sqlite:///./test02.db"
     POSTGRES_DATABASE_URLS: str
     POSTGRES_DATABASE_URLA: str
     POSTGRES_USER: str

@@ -15,14 +15,14 @@ def get_session():
 #реализация маршрутов для операций c конкретными тегами - конкретизация роутера
 users_router = APIRouter(tags=[Tags.users], prefix='/api/users')
 info_router = APIRouter(tags=[Tags.info])
-
+tickets_router = APIRouter(tage=[Tags.tickets])
 
 def coder_passwd(cod: str):
     return cod*2
 
 
 @users_router.get("/{id}", response_model=Union[New_Respons, Main_User], tags=[Tags.info])
-# далее идут опуерации пути для CRUD
+# далее идут операции пути для CRUD
 def get_user_(id: int, DB: Session = Depends(get_session)):
     '''
     получаем пользователя по id

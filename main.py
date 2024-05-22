@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from datetime import datetime
 
+from starlette.responses import JSONResponse
+
 from public.db import create_tables
 #from db import f
 #from public.router_users import init_db
@@ -14,7 +16,6 @@ app = FastAPI()
 #f_bilder()
 
 create_tables()
-
 app.include_router(users_router)
 @app.on_event("startup")
 def on_startup():
@@ -26,7 +27,7 @@ def shutdown():
 
 @app.get("/")
 def main():
-    return FileResponse("files/index.html")
+    return JSONResponse("Hello")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)

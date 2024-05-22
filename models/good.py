@@ -12,6 +12,9 @@ Base = declarative_base()
 #     name = Column(String, index=True, nullable=False)
 #     folder = Column(String, nullable=True)
 #     hashed_password = Column(String)
+
+
+
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, Identity(start=10), primary_key=True)
@@ -31,9 +34,9 @@ class User(Base):
 #     owner = relationship("User", back_populates="goods")
 class Tags(Enum):
     users = "users"
-    advents = "advents"
+    tickets = "tickets"
     info = "info"
-    good = "good"
+
 
 
 class Person(BaseModel):
@@ -41,19 +44,19 @@ class Person(BaseModel):
     age: int = Field(default=100, ge=10, lt=200)
 
 
-class Foto(BaseModel):
-    url: HttpUrl
-    name: Union[str, None] = None
+#class Foto(BaseModel):
+#    url: HttpUrl
+#   name: Union[str, None] = None
 
 
-class User_new(BaseModel):
-    name: Union[str, None] = None
-    id: Annotated[Union[int, None], Field(default=100, ge=10, lt=200)] = None
-    person: Union[Person, None] = None
-    day_list0: list
-    day_list1: Union[list, None] = None
-    day_list2: Union[list[int], None] = None
-    foto_list: Union[list[Foto], None] = None
+#class User_new(BaseModel):
+#    name: Union[str, None] = None
+#    id: Annotated[Union[int, None], Field(default=100, ge=10, lt=200)] = None
+#   person: Union[Person, None] = None
+#    day_list0: list
+#    day_list1: Union[list, None] = None
+#    day_list2: Union[list[int], None] = None
+#    foto_list: Union[list[Foto], None] = None
 
 
 class Good(BaseModel):
@@ -68,6 +71,18 @@ class Main_User(BaseModel):
     id: Annotated[Union[int, None], Field(default=100, ge=1, lt=200)] = None
     name: Union[str, None] = None
 
+class Ticket(Base):
+    __tablename__ = "tickets"
+    id = Column(Integer, Identity(start=10), primary_key=True)
+    name_person_ticket = Column(String, index=True, nullable=False)
+    to_go = Column(String, nullable=False)
+    price = Column(Integer)
+
+class Main_Ticket(BaseModel):
+    id: Annotated[Union[int, None], Field(default=100, ge=1, lt=200)] = None
+    name_person_ticket = Union[str, None] = None
+    to_go = Union[str, None] = None
+    price = Union[str, None] = None
 
 class Main_UserDB(Main_User):
     hashed_password: Annotated[Union[str, None], Field(max_length=200, min_length=6)] = None
