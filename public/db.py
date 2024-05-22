@@ -6,7 +6,7 @@ from models.users import Categor, Staff
 
 # определяем параметры для подключения
 # settings.DATABASE_URL = 'sqlite:///./test02.db
-#ur_p = "postgresql://postgres:900@localhost:5432/dbtest04"
+#ur_p = "postgresql://postgres:artem@localhost:5432/dbtest04"
 ur_s = settings.POSTGRES_DATABASE_URLS
 ur_a = settings.POSTGRES_DATABASE_URLA
 

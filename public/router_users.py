@@ -4,6 +4,8 @@ from starlette import status
 from models.good import *
 from sqlalchemy.orm import sessionmaker, Session
 from public.db import engine_s
+
+
 def get_session():
      with Session(engine_s) as session:
          try:
@@ -13,8 +15,12 @@ def get_session():
 #реализация маршрутов для операций c конкретными тегами - конкретизация роутера
 users_router = APIRouter(tags=[Tags.users], prefix='/api/users')
 info_router = APIRouter(tags=[Tags.info])
+
+
 def coder_passwd(cod: str):
     return cod*2
+
+
 @users_router.get("/{id}", response_model=Union[New_Respons, Main_User], tags=[Tags.info])
 # далее идут опуерации пути для CRUD
 def get_user_(id: int, DB: Session = Depends(get_session)):
@@ -28,6 +34,7 @@ def get_user_(id: int, DB: Session = Depends(get_session)):
     # если пользователь найден, отправляем его
     else:
         return user
+
 @users_router.get("/", response_model=Union[list[Main_User], New_Respons], tags=[Tags.users])
 def get_user_db(DB: Session = Depends(get_session)):
     '''
@@ -38,6 +45,7 @@ def get_user_db(DB: Session = Depends(get_session)):
     if users == None:
         return JSONResponse(status_code=404, content={"message": "Пользователи не найдены"})
     return users
+
 @users_router.post("/", response_model=Union[Main_User, New_Respons], tags=[Tags.users], status_code=status.HTTP_201_CREATED)
 def create_user(item: Annotated[Main_User, Body(embed=True, description="Новый пользователь")],
                 DB: Session = Depends(get_session)):
